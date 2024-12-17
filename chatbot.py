@@ -9,9 +9,6 @@ import pytesseract
 import re
 from configparser import ConfigParser
 
-config = ConfigParser()
-config.read('settings.ini')
-
 associate = {
     '/forward': 'forward',
     '/backward': 'backward',
@@ -19,7 +16,7 @@ associate = {
     '/right': 'right'
 }
 
-AbsolutePathToTesseract = config['PATHS']['AbsolutePathToTesseract']
+AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd=AbsolutePathToTesseract
 
 def split_text(input_text):
