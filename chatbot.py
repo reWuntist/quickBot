@@ -8,6 +8,13 @@ import dxcam
 import pytesseract
 import re
 
+associate = {
+    '/forward': 'forward',
+    '/backward': 'backward',
+    '/left': 'left',
+    '/right': 'right'
+}
+
 AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd=AbsolutePathToTesseract
 
@@ -33,9 +40,9 @@ while coordinates is None:
     except pyautogui.ImageNotFoundException:
         roblox.Main.Character.cameraZoom('out')
 
-roblox.Main.write('/clear')
-roblox.Main.write('!team me Bot')
-roblox.Main.write('/clear')
+roblox.Main.chat('/clear')
+roblox.Main.chat('!team me Bot')
+roblox.Main.chat('/clear')
 camera = dxcam.create()
 
 while keyboard.is_pressed('l') == False:
@@ -47,15 +54,8 @@ while keyboard.is_pressed('l') == False:
         continue
     result = pytesseract.image_to_string(AbsolutePathToScreenshot, lang='eng')
     
-    if '/forward' in result:
-        roblox.Main.Movement.move(16,16,'forward')
-        roblox.Main.Character.chat('/clear')
-    elif '/backward' in result:
-        roblox.Main.Movement.move(16,16,'backward')
-        roblox.Main.Character.chat('/clear')
-    elif '/left' in result:
-        roblox.Main.Movement.move(16,16,'left')
-        roblox.Main.Character.chat('/clear')
-    elif '/right' in result:
-        roblox.Main.Movement.move(16,16,'right')
+    extractedList = split_text(result)
+    
+    if extractedList[1] in associate:
+        roblox.Main.Movement.move(int(extractedList[2])*2,16,associate[extractedList[1]])
         roblox.Main.Character.chat('/clear')
