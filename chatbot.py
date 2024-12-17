@@ -23,8 +23,8 @@ def split_text(input_text):
 roblox.Main.Character.resetCharacter()
 roblox.Main.keyPress('/', 0.1, 'Roblox')
 
-AbsolutePathToTemplate = r'C:\Users\Gamer\Desktop\Work\Programming\Roblox\Python - Roblox\Blockate Buffoonery\AI Chat\storage\Template.png'
-AbsolutePathToScreenshot = r'C:\Users\Gamer\Desktop\Work\Programming\Roblox\Python - Roblox\Blockate Buffoonery\AI Chat\storage\screenshot.png'
+AbsolutePathToTemplate = r'storage\Template.png'
+AbsolutePathToScreenshot = r'storage\screenshot.png'
 
 coordinates = None
 while coordinates is None:
