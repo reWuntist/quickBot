@@ -18,7 +18,7 @@ associate = {
     '/right': 'right'
 }
 
-AbsolutePathToTesseract = ['paths']['AbsolutePathToTesseract']
+AbsolutePathToTesseract = config['paths']['AbsolutePathToTesseract']
 pytesseract.pytesseract.tesseract_cmd=AbsolutePathToTesseract
 
 def split_text(input_text):
