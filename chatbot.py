@@ -55,7 +55,11 @@ while keyboard.is_pressed('l') == False:
         continue
     result = pytesseract.image_to_string(pathToScreenshot, lang='eng')
     
-    extractedList = split_text(result)
+    try:
+        extractedList = split_text(str(result))
+    except ValueError:
+        print('Result is probably empty.')
+        continue
     
     if extractedList[1] in associate:
         roblox.Main.Movement.move(int(extractedList[2])*2,16,associate[extractedList[1]])
