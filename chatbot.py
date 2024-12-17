@@ -7,6 +7,9 @@ import time
 import dxcam
 import pytesseract
 import re
+from configparser import ConfigParser
+
+config = ConfigParser()
 
 associate = {
     '/forward': 'forward',
@@ -15,7 +18,7 @@ associate = {
     '/right': 'right'
 }
 
-AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+AbsolutePathToTesseract = ['paths']['AbsolutePathToTesseract']
 pytesseract.pytesseract.tesseract_cmd=AbsolutePathToTesseract
 
 def split_text(input_text):
@@ -30,13 +33,13 @@ def split_text(input_text):
 roblox.Main.Character.resetCharacter()
 roblox.Main.keyPress('/', 0.1, 'Roblox')
 
-AbsolutePathToTemplate = r'storage\Template.png'
-AbsolutePathToScreenshot = r'storage\screenshot.png'
+pathToTemplate = r'storage\Template.png'
+pathToScreenshot = r'storage\screenshot.png'
 
 coordinates = None
 while coordinates is None:
     try: 
-        coordinates = pyautogui.locateOnScreen(AbsolutePathToTemplate) 
+        coordinates = pyautogui.locateOnScreen(pathToTemplate) 
     except pyautogui.ImageNotFoundException:
         roblox.Main.Character.cameraZoom('out')
 
@@ -48,11 +51,11 @@ camera = dxcam.create()
 while keyboard.is_pressed('l') == False:
     frame = camera.grab((0,25,coordinates[0]+coordinates.height,coordinates[1]))
     try:
-        cv2.imwrite(AbsolutePathToScreenshot, cv2.cvtColor(frame,cv2.COLOR_RGB2BGR))
+        cv2.imwrite(pathToScreenshot, cv2.cvtColor(frame,cv2.COLOR_RGB2BGR))
     except:
         roblox.Main.Character.chat('Unable to take photo.')
         continue
-    result = pytesseract.image_to_string(AbsolutePathToScreenshot, lang='eng')
+    result = pytesseract.image_to_string(pathToScreenshot, lang='eng')
     
     extractedList = split_text(result)
     
