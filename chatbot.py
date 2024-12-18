@@ -18,8 +18,9 @@ associate = {
 
 AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd=AbsolutePathToTesseract
+config = '--oem 3 --psm %d' % 13
 
-def split_text(input_text):
+def split_text(input_text: str) -> list:
     # Use regex to extract components
     pattern = r"\[(.*?)\]:\s*(/\w+)\s*(\d+)"
     match = re.match(pattern, input_text)
@@ -53,6 +54,7 @@ while keyboard.is_pressed('l') == False:
         roblox.Main.Character.chat('Unable to take photo.')
         continue
     result = pytesseract.image_to_string(pathToScreenshot, lang='eng')
+    print(result)
     
     try:
         extractedList = split_text(str(result))
