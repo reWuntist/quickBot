@@ -41,7 +41,6 @@ while coordinates is None:
     except pyautogui.ImageNotFoundException:
         roblox.Main.Character.cameraZoom('out')
 
-roblox.Main.Character.chat('/clear')
 roblox.Main.Character.chat('!team me Bot')
 roblox.Main.Character.chat('/clear')
 camera = dxcam.create()
