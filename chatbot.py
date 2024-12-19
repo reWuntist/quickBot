@@ -23,15 +23,6 @@ AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd=AbsolutePathToTesseract
 config = '--oem 3 --psm %d' % 13
 
-def split_text(input_text: str) -> list:
-    # Use regex to extract components
-    pattern = r"\[(.*?)\]:\s*(/\w+)\s*(\d+)"
-    match = re.match(pattern, input_text)
-    if match:
-        return [match.group(1), match.group(2), match.group(3)]
-    else:
-        raise ValueError("Input text does not match the expected format")
-
 roblox.Main.Character.resetCharacter()
 roblox.Main.keyPress('/', 0.1, 'Roblox')
 
@@ -57,17 +48,10 @@ while keyboard.is_pressed('l') == False:
         roblox.Main.Character.chat('Unable to take photo.')
         continue
     result = pytesseract.image_to_string(pathToScreenshot, lang='eng')
-    print(result)
     
-    try:
-        extractedList = split_text(str(result))
-    except ValueError:
-        print('Result is probably empty.')
-        continue
-    
-    if extractedList[1] in associate:
-        if extractedList[1] in roblox.directions:
-            roblox.Main.Movement.move(int(extractedList[2])*2,16,associate[extractedList[1]])
+    if result in associate:
+        if result in roblox.directions:
+            roblox.Main.Movement.move(16,16,associate[result])
             roblox.Main.Character.chat('/clear')
         else:
-            roblox.Main.Character.chat(extractedList[1])
+            roblox.Main.Character.chat(result)
