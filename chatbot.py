@@ -48,6 +48,7 @@ while keyboard.is_pressed('l') == False:
         roblox.Main.Character.chat('Unable to take photo.')
         continue
     result = pytesseract.image_to_string(pathToScreenshot, lang='eng')
+    print(result)
     
     if result in associate:
         if result in roblox.directions:
@@ -55,3 +56,5 @@ while keyboard.is_pressed('l') == False:
             roblox.Main.Character.chat('/clear')
         else:
             roblox.Main.Character.chat(result)
+    else:
+        pass
