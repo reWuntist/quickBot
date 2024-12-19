@@ -10,13 +10,13 @@ import re
 from configparser import ConfigParser
 
 associate = {
-    '/forward': 'forward',
-    '/backward': 'backward',
-    '/left': 'left',
-    '/right': 'right',
-    '/hi': 'hello',
-    '/py': 'thon',
-    '/help': 'Still working on this.'
+    'forward': 'forward',
+    'backward': 'backward',
+    'left': 'left',
+    'right': 'right',
+    'hi': 'hello',
+    'py': 'thon',
+    'help': 'Still working on this.'
 }
 
 AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
