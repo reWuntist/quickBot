@@ -13,7 +13,10 @@ associate = {
     '/forward': 'forward',
     '/backward': 'backward',
     '/left': 'left',
-    '/right': 'right'
+    '/right': 'right',
+    '/hi': 'hello',
+    '/py': 'thon',
+    '/help': 'Still working on this.'
 }
 
 AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -63,5 +66,8 @@ while keyboard.is_pressed('l') == False:
         continue
     
     if extractedList[1] in associate:
-        roblox.Main.Movement.move(int(extractedList[2])*2,16,associate[extractedList[1]])
-        roblox.Main.Character.chat('/clear')
+        if extractedList[1] in roblox.directions:
+            roblox.Main.Movement.move(int(extractedList[2])*2,16,associate[extractedList[1]])
+            roblox.Main.Character.chat('/clear')
+        else:
+            roblox.Main.Character.chat(extractedList[1])
