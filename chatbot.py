@@ -9,14 +9,19 @@ import pytesseract
 import re
 from configparser import ConfigParser
 
+def splitAccordingly(text: str) -> list:
+    pattern = r'\[([A-Za-z0-9_]+)\]: (/\w+)'
+    return re.findall(pattern=pattern, text=text)
+
 associate = {
-    'forward': 'forward',
-    'backward': 'backward',
-    'left': 'left',
-    'right': 'right',
-    'hi': 'hello',
-    'py': 'thon',
-    'help': 'Still Working on this.'
+    '/forward': 'forward',
+    '/backward': 'backward',
+    '/left': 'left',
+    '/right': 'right',
+    '/hi': 'hello',
+    '/py': 'thon',
+    '/help': 'Still Working on this.',
+    '/test': '1, 2, 3... Testing'
 }
 
 AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -46,17 +51,20 @@ while keyboard.is_pressed('l') == False:
         cv2.imwrite(pathToScreenshot, cv2.cvtColor(frame,cv2.COLOR_RGB2BGR))
     except:
         roblox.Main.Character.chat('Unable to take photo.')
+        roblox.Main.Character.chat('/clear')
         continue
     result = pytesseract.image_to_string(pathToScreenshot, lang='eng')
-    print(result)
     
-    for item in associate:
-        if item in result:
-            if item in roblox.directions:
-                roblox.Main.Movement.move(16,16,associate[item])
-                roblox.Main.Character.chat('/clear')
+    extracted = splitAccordingly(result)
+    
+    for username, command in extracted:
+        for item in associate:
+            if item == command:
+                if associate[command] in roblox.directions:
+                    roblox.Main.Movement.move(16,16,associate[item])
+                    roblox.Main.Character.chat('/clear')
+                else:
+                    roblox.Main.Character.chat(associate[item])
+                    roblox.Main.Character.chat('/clear')
             else:
-                roblox.Main.Character.chat(associate[item])
-                roblox.Main.Character.chat('/clear')
-        else:
-            pass
+                pass
