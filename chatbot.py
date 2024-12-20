@@ -57,5 +57,6 @@ while keyboard.is_pressed('l') == False:
                 roblox.Main.Character.chat('/clear')
             else:
                 roblox.Main.Character.chat(associate[item])
+                roblox.Main.Character.chat('/clear')
         else:
             pass
