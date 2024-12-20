@@ -7,22 +7,18 @@ import time
 import dxcam
 import pytesseract
 import re
-from configparser import ConfigParser
+import yaml
+
+file = 'commands.yaml'
+
+with open(file, 'r') as file:
+    data = yaml.safe_load(file)
+
+associate = data
 
 def splitAccordingly(text: str) -> list:
     pattern = r'\[([A-Za-z0-9_]+)\]: (/\w+)'
     return re.findall(pattern=pattern, string=text)
-
-associate = {
-    '/forward': 'forward',
-    '/backward': 'backward',
-    '/left': 'left',
-    '/right': 'right',
-    '/hi': 'hello',
-    '/py': 'thon',
-    '/help': 'Still Working on this.',
-    '/test': '1, 2, 3... Testing'
-}
 
 AbsolutePathToTesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd=AbsolutePathToTesseract
