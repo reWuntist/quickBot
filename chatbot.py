@@ -53,7 +53,7 @@ while keyboard.is_pressed('l') == False:
     for item in associate:
         if item in result:
             if item in roblox.directions:
-                roblox.Main.Movement.move(16,16,associate[result])
+                roblox.Main.Movement.move(16,16,associate[item])
                 roblox.Main.Character.chat('/clear')
             else:
                 roblox.Main.Character.chat(associate[item])
