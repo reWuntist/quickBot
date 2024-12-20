@@ -11,7 +11,7 @@ from configparser import ConfigParser
 
 def splitAccordingly(text: str) -> list:
     pattern = r'\[([A-Za-z0-9_]+)\]: (/\w+)'
-    return re.findall(pattern=pattern, text=text)
+    return re.findall(pattern=pattern, string=text)
 
 associate = {
     '/forward': 'forward',
